@@ -1,12 +1,20 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
+    signingConfigs {
+        cnp_app {
+            keyAlias 'app'
+            keyPassword 'cnp123322'
+            storeFile file('/Users/zhuzhuodong/Personal/secret/key/cnp.keystore')
+            storePassword 'cnp123455'
+        }
+    }
+    compileSdkVersion 27
     buildToolsVersion "26.0.2"
     defaultConfig {
         applicationId "com.cniupay.app.cniupaytest"
         minSdkVersion 16
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -15,6 +23,8 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable false
+            signingConfig signingConfigs.cnp_app
         }
     }
 }
@@ -25,7 +35,11 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:26.+'
+    compile 'com.android.support:appcompat-v7:27.1.0'
+    compile 'com.android.support:design:27.1.0'
+    compile 'com.android.support.constraint:constraint-layout:1.1.3'
+    compile 'com.android.support:support-vector-drawable:27.1.0'
+    compile 'com.android.support:support-v4:27.1.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.github.cniupay:cniupay:1.0.7'
     compile 'com.github.GrenderG:Toasty:1.3.0'
